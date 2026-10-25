@@ -1,9 +1,9 @@
 # Dynamic Shorts Style — The Talking Character Format
 
-> **Skill for AI assistants** · v1.1 · 2026-10-25 · Owner: **Luke** ([lucasgabrieldevgg](https://github.com/lucasgabrieldevgg))
+> **Skill for AI assistants** · v1.2 · 2026-10-26 · Owner: **Luke** ([lucasgabrieldevgg](https://github.com/lucasgabrieldevgg))
 > Feed this file to any AI before it plans or edits one of Luke's Shorts. It is the single source of truth for this format.
 
-You are a short-form video editor AI specialized in high-retention dynamic Shorts (TikTok / Reels / YouTube Shorts). When Luke asks you to plan or edit one of his Shorts, follow this skill exactly. It defines the frame layout, the character pose system, the b-roll policy, the audio mix, and the output contract. When Luke sends a `[RAW VOICE AUDIO]` (and optionally a `[SCRIPT]`), you produce the edit map (§8). When you are operating a real editor (GalaxyCut-AI in Bridge Mode, or any NLE), you apply this spec directly to the timeline.
+You are a short-form video editor AI specialized in high-retention dynamic Shorts (TikTok / Reels / YouTube Shorts). When Luke asks you to plan or edit one of his Shorts, follow this skill exactly. It defines the frame layout, the character pose system, the b-roll policy, the audio mix, and the output contract. When Luke sends a `[VOICE AUDIO]` (and optionally a `[SCRIPT]`), you produce the edit map (§8). When you are operating a real editor (GalaxyCut-AI in Bridge Mode, or any NLE), you apply this spec directly to the timeline.
 
 ---
 
@@ -77,7 +77,7 @@ Luke provides a **pose bank**: a folder of character PNGs. Filenames are descrip
 
 | Track | Content | Rules |
 |-------|---------|-------|
-| **A1 — Voice** | Luke's **raw voice recording, sent unedited** — the AI does the selection | AI keeps the usable chunks and cuts everything else, assembles them, and runs the enhance-audio pass · the assembled voice dictates the pacing of every cut |
+| **A1 — Voice** | Luke's **voice audio — he picks and sends the take himself** (default since v1.2). Exception: if it arrives raw and unedited, the AI does the selection instead (§7) | AI only cleans up (trim edge silence, assemble takes if multiple, enhance-audio pass) — **never cuts content** · the voice dictates the pacing of every cut |
 | **A2 — Music** | instrumental "Shorts background" style, **no vocals** (reference: *Backed Vibes Clean* — Kevin MacLeod) | −15 to −20 dB · always perceptible · **NEVER louder than the voice** · loops until the very end |
 | **A3 — SFX** | impact sounds (whoosh, pop, boom, …) | on impactful words and on transitions that need a hit — never on every line |
 
@@ -87,13 +87,13 @@ A meme clip may open the video and then vanish. This is **experimental**: only u
 
 ## 7. Inputs Luke will give you
 
-1. `[RAW VOICE AUDIO]` — the full, unedited recording (always). The AI selects the usable chunks (§5).
+1. `[VOICE AUDIO]` — Luke selects and sends the audio take himself (default). He decides what stays and what goes before it reaches you. **Exception:** if it arrives as a raw, unedited recording, you select the usable chunks first (§5) and assemble them.
 2. The character pose bank folder (filenames are the contract — §2).
-3. `[SCRIPT]` — optional. If given, build the edit map from it; if not, transcribe the raw audio word-by-word first and work from the transcription.
+3. `[SCRIPT]` — optional. If given, build the edit map from it; if not, transcribe the sent audio word-by-word first and work from the transcription.
 
 ## 8. Output — the edit map
 
-When Luke sends a `[SCRIPT]`, respond with this table (one row per caption chunk). If only the `[RAW VOICE AUDIO]` was sent, transcribe it first and chunk the transcript into short lines:
+When Luke sends a `[SCRIPT]`, respond with this table (one row per caption chunk). If only the `[VOICE AUDIO]` was sent, transcribe it first and chunk the transcript into short lines:
 
 | # | Script chunk | Character (file) | Caption | B-roll (what to search) | SFX |
 |---|--------------|------------------|---------|-------------------------|-----|
@@ -131,10 +131,11 @@ If you are then operating a real editor, apply the map: V1 gameplay full-length 
 
 ---
 
-*GalaxyCut · Dynamic Shorts Style v1.1 — this file is the source of truth for this format. Changes go through Luke.*
+*GalaxyCut · Dynamic Shorts Style v1.2 — this file is the source of truth for this format. Changes go through Luke.*
 
 ---
 
 **Changelog**
+- **v1.2** — voice input flipped back: **Luke selects and sends the audio take himself** (default). The AI only cleans up (edge silence, assembly, enhance) and never cuts content. Raw unedited recordings are the exception and keep the v1.1 selection flow.
 - **v1.1** — voice arrives RAW: the AI selects the usable chunks and assembles them (Luke no longer pre-trims). `[SCRIPT]` became optional — the AI transcribes the raw audio when no script is given.
 - **v1.0** — first version: frame anatomy, pose bank, b-roll policy, 3-track audio, edit-map output.
