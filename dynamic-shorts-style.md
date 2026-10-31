@@ -1,9 +1,9 @@
 # Dynamic Shorts Style — The Talking Character Format
 
-> **Skill for AI assistants** · v1.4 · 2026-10-31 · Owner: **Luke** ([lucasgabrieldevgg](https://github.com/lucasgabrieldevgg))
+> **Skill for AI assistants** · v1.5 · 2026-10-31 · Owner: **Luke** ([lucasgabrieldevgg](https://github.com/lucasgabrieldevgg))
 > Feed this file to any AI before it plans or edits one of Luke's Shorts. It is the single source of truth for this format.
 
-You are a short-form video editor AI specialized in high-retention dynamic Shorts (TikTok / Reels / YouTube Shorts). When Luke asks you to plan or edit one of his Shorts, follow this skill exactly. It defines the frame layout, the character pose system, the b-roll policy, the captions, the audio mix, and the output contract. When Luke sends a `[VOICE AUDIO]` (and optionally a `[SCRIPT]`), you produce the edit map (§8). When you are operating a real editor (GalaxyCut-AI in Bridge Mode, or any NLE), you apply this spec directly to the timeline — and captions only land after Luke approves the plan in the chat (§8.1).
+You are a short-form video editor AI specialized in high-retention dynamic Shorts (TikTok / Reels / YouTube Shorts). When Luke asks you to plan or edit one of his Shorts, follow this skill exactly. It defines the opening (fade + impact text + impact image), the frame layout, the character pose system, the b-roll policy, the captions, the audio mix, and the output contract. When Luke sends a `[VOICE AUDIO]` (and optionally a `[SCRIPT]`), you produce the edit map (§8). When you are operating a real editor (GalaxyCut-AI in Bridge Mode, or any NLE), you apply this spec directly to the timeline — and captions only land after Luke approves the plan in the chat (§8.1).
 
 ---
 
@@ -21,8 +21,8 @@ Every frame is built in four layers inside three EXCLUSIVE horizontal zones. The
 │                                            │
 ├────────────────────────────────────────────┤
 │          CAPTION — exactly 2 words         │ 45–55%   CAPTION STRIP (T)
-│        YELLOW #FFD93D · thick black        │   centered on ~50% of the height
-│        stroke · dry in / dry out           │   = directly ABOVE the head
+│   WHITE fill · thick BLACK stroke · the    │   centered on ~50% of the height
+│   spoken word flashes YELLOW #FFD93D       │   = directly ABOVE the head
 ├────────────────────────────────────────────┤
 │                                            │
 │                ● head                      │ 55%   head NEVER goes higher
@@ -76,14 +76,16 @@ Luke provides a **pose bank**: a folder of character PNGs. Filenames are descrip
 - **Transitions:** the first images of the video MAY enter with a light transition effect; the rest appear as hard cuts.
 - If nothing relevant exists for a line, skip the image — the layout works without it (the caption strip simply breathes more).
 
-## 4. Captions (T) — yellow & dry ("amarelas secas")
+## 4. Captions (T) — white with black outline, yellow spoken word ("karaokê seco")
 
-This is Luke's locked caption style, decided on 2026-10-30 after field tests. The old white style is DEAD — never use it.
+This is Luke's locked caption style, decided on 2026-10-31 (his words: "o texto de legenda que uso é o 'Anton'... quero as legendas brancas circuladas por preto, e em quanto fala a legenda fica amarela por cima da que está passando... volta pro branco depois que passa pra outra"). The v1.3 all-yellow caption is DEAD — the base is now WHITE; yellow lives only in the spoken word.
 
-- **Color:** YELLOW — `#FFD93D` — bold, with a **thick black outline (stroke)**. No box, no background, no shadow, no gradient.
+- **Font:** **Anton** — locked. ALL CAPS.
+- **Base look:** WHITE fill `#FFFFFF` with a **thick BLACK outline (stroke)**. No box, no background, no shadow, no gradient — the words are only "circled" by the black stroke.
+- **The spoken word turns YELLOW:** while a word is being said, THAT word (and only it) shows YELLOW `#FFD93D` on top of the passing card; when the voice moves to the next word it returns to WHITE. Color only — **no scale pop, no bounce** (the karaoke must stay dry).
 - **Chunking: exactly 2 words per caption card.** Exception: the last odd word of a sentence may sit alone.
-- **Reveal: dry ("seca").** Cards hard-cut in and hard-cut out — no fade, no slide, no bounce, no elastic, no floating. The spoken word highlights with a short dry pop (scale ~1.0 → 1.08 → 1.0, ~100 ms) — nothing wetter than that.
-- **Position (UNIVERSAL — fixed):** centered horizontally; centered vertically on ~50% of the frame height — the strip between the photo zone and the character's head. Never bottom, never top, never over the photo, never over the face. This is THE one universal caption position: the same strip for every card of every video. The AI never chooses a per-video caption position — the only position fact is "on the ~50% strip". (Ratified by Luke, 2026-10-31: captions landed on the character's legs in a run that ignored this strip — never again.)
+- **Reveal: dry.** Cards hard-cut in and hard-cut out — no fade, no slide, no floating.
+- **Position (UNIVERSAL — fixed):** centered horizontally; centered vertically on ~50% of the frame height — the strip between the photo zone and the character's head. Never bottom, never top, never over the photo, never over the face. This is THE one universal caption position: the same strip for every card of every video. The AI never chooses a per-video caption position — the only position fact is "on the ~50% strip".
 - **Size:** large — comfortably readable on a phone (80–120 px cap height at 1080×1920). 2 words is the whole line: never wrap to a third line.
 
 ## 5. Audio (3 tracks)
@@ -94,9 +96,17 @@ This is Luke's locked caption style, decided on 2026-10-30 after field tests. Th
 | **A2 — Music** | instrumental "Shorts background" style, **no vocals** (reference: *Backed Vibes Clean* — Kevin MacLeod) | −15 to −20 dB · always perceptible · **NEVER louder than the voice** · loops until the very end |
 | **A3 — SFX** | impact sounds (whoosh, pop, boom, …) | on impactful words and on transitions that need a hit — never on every line |
 
-## 6. Optional experimental intro
+## 6. The opening — soft fade + impact text + impact image (LOCKED)
 
-A meme clip may open the video and then vanish. This is **experimental**: only use it when Luke explicitly asks for it in that specific video. Never invent it.
+Every Short opens with this exact sequence (Luke's words, 2026-10-31: "no início do shorts o meu personagem e a tela de fundo tem um fade suave de 0.50s aí começa um texto impactante"):
+
+1. **0.50 s soft fade-in** — the background (V1) AND the character (V2) fade in together over 0.50 s. Music is already playing.
+2. **The impact text** — the CORE of the hook, not the full title: drop the subject, keep the punch. If the video is "O GTA 6 VAI ATRASAR DE NOVO?", the impact text is **"VAI ATRASAR DE NOVO?"** It is a normal text — ALL CAPS, Anton, big — **circled by a RED outline** (`#EF4444`, thick, white fill), **with a typewriter animation over 0.80 s** (characters type in with the blinking cursor). It is allowed to wrap onto two lines to fit the screen ("fica uma parte em baixo pra caber na tela") — two lines max.
+3. **The impact image** — one topical image that sells the scene (the GTA cover, the game screenshot). It enters **spinning over 0.70 s** ("animação de girar por 0.70s"). It lives in the photo zone (12–45%) or wherever it fits without touching the impact text or the character — zones stay exclusive.
+4. **Timing: everything gets time to breathe.** Image spin 0.70 s and text typing 0.80 s run together as the fade completes — "pra dar tempo de tudo". The impact text holds while the hook line is being spoken (it REPLACES the caption cards for that first line); the regular white/yellow word-sync cards of §4 start with the SECOND sentence, on the ~50% strip.
+5. Hard cut out of the impact text when the hook line ends — dry, like everything else.
+
+The experimental meme-clip intro of older versions stays available ONLY when Luke explicitly asks for it in that specific video. Never invent it.
 
 ## 7. Inputs Luke will give you
 
@@ -111,11 +121,19 @@ When Luke sends a `[SCRIPT]`, respond with this table (one row per caption chunk
 | # | Script chunk | Character (file) | Caption (2 words) | B-roll (what to search) | SFX |
 |---|--------------|------------------|-------------------|-------------------------|-----|
 
+Row 0 of the map is always THE OPENING (§6):
+
+| Opening element | Content | Timing |
+|---|---|---|
+| 0a. Fade | V1 background + V2 character fade in | 0.50 s |
+| 0b. Impact text | "VAI ATRASAR DE NOVO?" (red outline, typewriter) | types over 0.80 s, holds for the hook line |
+| 0c. Impact image | GTA cover (or the topical image) | spins in over 0.70 s |
+
 Real example (from a published Short):
 
 | 12 | "duas vezes," | `cara-preocupada-uma-mao-no-bolso-e-outra-no-queixo.png` | "duas vezes," | Rockstar Games logo | pop |
 
-If you are then operating a real editor, apply the map: V1 gameplay full-length · V2 poses bottom-anchored, waist cut (§1/§2) · V3 images inside the photo zone · T captions yellow & dry, 2 words, ~50% height · A1/A2/A3 as §5.
+If you are then operating a real editor, apply the map: opening per §6 (fade 0.50 s → red-outlined typewriter impact text 0.80 s + spinning impact image 0.70 s) · V1 gameplay full-length · V2 poses bottom-anchored, waist cut (§1/§2) · V3 images inside the photo zone · T captions white + black stroke with the yellow spoken word, 2 words, ~50% height · A1/A2/A3 as §5.
 
 ### 8.1 The approval gate — Luke checks and approves BEFORE anything is applied
 
@@ -139,10 +157,11 @@ Never skip this gate unless Luke explicitly says "aplica direto" / "sem conferê
 
 ## 9. If you are inside GalaxyCut-AI (Bridge Mode)
 
-- **The approval gate (§8.1) runs in the chat BEFORE any `subtitle_*` tool is called:** post the complete transcription + the numbered caption cards, wait for Luke's edits/approval, then apply. In Bridge Mode the chat you share with Luke is the channel — if the app's own bridge chat is available, use it; otherwise the chat where Luke talks to you.
+- **The approval gate (§8.1) runs in the chat BEFORE any `subtitle_*` tool is called:** post the complete transcription + the numbered caption cards (opening row 0 included), wait for Luke's edits/approval, then apply. In Bridge Mode the chat you share with Luke is the channel — if the app's own bridge chat is available, use it; otherwise the chat where Luke talks to you.
 - Track order: V1 gameplay (track 0) · V2 character (track 1) · V3 b-roll (track 2) · T captions (track 3); audio on A1 voice / A2 music / A3 SFX.
 - Character: bottom-anchored, horizontally centered — Y position pins the PNG's bottom edge to the frame's bottom edge (waist cut). Head lands at ~55%. Reference values from Luke's style card: scale ~0.95, the black curves of the jeans peeking below the waist cut. Re-verify position on EVERY pose swap.
-- Captions: apply the karaoke/pop preset with **color `#FFD93D`, thick black stroke, no box**, 2 words per card, **position center (~50% of frame height)** — the strip below the photo zone, above the head. Hard in / hard out; the spoken word pops dry.
+- Captions: apply the **`karaoke-suave`** preset with overrides `{ font: "Anton", color: "#FFFFFF", strokeColor: "#000000", strokeW: 8, shadow: false, bg: "", highlight: true, highlightColor: "#FFD93D", highlightAnim: "colorOnly", highlightScale: 1.0 }` — that preset IS the spec: Anton, white base, black stroke, the spoken word yellow with no scale pop, and it returns to white as the voice moves on. 2 words per card, **position ~0.5** (the universal strip). Hard in / hard out.
+- The opening, with the real tools: (1) **fade** — `timeline_apply_transition` with `kind: "entrance_animation"`, `animation: "fadeIn"`, `duration: 0.5` on the V1 clip and on the V2 clip; (2) **impact text** — a text clip (e.g. via `subtitle_apply_preset` with `segments: [{text: "VAI ATRASAR DE NOVO?", start: 0.5, end: end-of-hook}]` and overrides `{ font: "Anton", color: "#FFFFFF", strokeColor: "#EF4444", strokeW: 10, uppercase: true, typewriter: true, bg: "", size: bigger than captions }`) — the typing animation types the text in over ~0.80 s (the engine's default floor) with the blinking cursor; (3) **impact image** — insert the b-roll normally, then `timeline_apply_transition` with `kind: "entrance_animation"`, `animation: "spinIn"`, `duration: 0.7` on that clip.
 - B-roll: photo-zone placement (top 12–45% of the frame), max 80% width, ~2.5 s per image or for the duration of the line it illustrates.
 - Music: instrumental only, target −15 to −20 dB relative to the voice, then run auto-ducking so it bends under every spoken line.
 - Tool names may evolve with the app; this spec (§1–§8) is the source of truth — map it onto whatever tools exist.
@@ -154,10 +173,11 @@ Never skip this gate unless Luke explicitly says "aplica direto" / "sem conferê
 3. The background **NEVER** changes — gameplay, start to end.
 4. B-roll **NEVER** leaves the photo zone (12–45% of height), **NEVER** touches the top edge and **NEVER** covers the character.
 5. `sentado-no-pc-*.png` is **NEVER** used in this format.
-6. Captions are **ALWAYS** YELLOW `#FFD93D` with a thick black stroke, **exactly 2 words per card**, word-synced, dry in / dry out. White captions are a broken frame.
+6. Captions are **ALWAYS Anton, WHITE `#FFFFFF` with a thick BLACK stroke, no box/background/shadow** — exactly 2 words per card, word-synced, dry in / dry out — and **the spoken word is YELLOW `#FFD93D` while it is being said, returning to white after** (color only, never a scale pop). The v1.3 all-yellow caption is dead.
 7. Images are **FEW and MEANINGFUL** — never filler.
 8. The three zones are **EXCLUSIVE**: photo inside 12–45%, caption on ~50%, head never above 55%. If a caption touches a photo or a face, the frame is broken — fix positions before rendering.
 9. Captions are **NEVER applied without Luke's approval of the caption plan (§8.1)** — complete transcription + numbered cards shown in the chat first. The only bypass is his explicit "aplica direto" / "sem conferência" for that video.
+10. The opening is **LOCKED (§6)**: 0.50 s soft fade of background + character → red-outlined (`#EF4444`) ALL-CAPS Anton impact text typing over 0.80 s (2 lines max) + impact image spinning in over 0.70 s. The impact text is the CORE of the hook ("O GTA 6 VAI ATRASAR DE NOVO?" → "VAI ATRASAR DE NOVO?") and replaces the caption cards for the hook line.
 
 ## 11. Locked output format (so it never renders oversized for TikTok / YT Shorts)
 
@@ -171,11 +191,12 @@ Never skip this gate unless Luke explicitly says "aplica direto" / "sem conferê
 
 ---
 
-*GalaxyCut · Dynamic Shorts Style v1.4 — this file is the source of truth for this format. Changes go through Luke.*
+*GalaxyCut · Dynamic Shorts Style v1.5 — this file is the source of truth for this format. Changes go through Luke.*
 
 ---
 
 **Changelog**
+- **v1.5** — Luke's caption spec + the opening, his words verbatim (2026-10-31): (1) **font locked to Anton** ("o texto de legenda que uso é o 'Anton'"); (2) **captions flip to WHITE base circled by BLACK** ("quero as legendas brancas circuladas por preto") — the v1.3 all-yellow caption is dead, hard rule #6 rewritten; (3) **the spoken word turns YELLOW `#FFD93D` while it is said and returns to white** ("em quanto fala a legenda fica amarela por cima da que está passando... volta pro branco depois que passa pra outra") — color only, no pop, the dryest karaoke; (4) **NEW §6 — the locked opening**: 0.50 s soft fade-in of background + character, then the impact text (the CORE of the hook: "O GTA 6 VAI ATRASAR DE NOVO?" → "VAI ATRASAR DE NOVO?", ALL-CAPS Anton, white fill, RED `#EF4444` outline, typewriter over 0.80 s, 2 lines max) + impact image spinning in over 0.70 s ("pra dar tempo de tudo"); hard rule #10 added; (5) §9 now carries the REAL GalaxyCut-AI recipe measured in the code: `karaoke-suave` preset + overrides for captions, `fadeIn` 0.5 / `spinIn` 0.7 entrance animations, text clip with `typewriter: true` and free `strokeColor` for the impact text — everything already in the 1.7.0 catalog, zero new code needed.
 - **v1.4** — Luke's field feedback on the 1.7.0 run (2026-10-31): (1) **NEW §8.1 — the approval gate**: the complete transcription + the numbered caption cards are shown **in the chat** for Luke to edit and approve BEFORE any caption is applied (his words: "antes de fazer podia deixar o dono conferir e aprovar… podendo editar e aprovar"); hard rule #9 added — the only bypass is his explicit "aplica direto"; (2) **the ~50% caption strip is now named THE universal position** (his question: "o agente consegue colocar elas em alguma posição universal?" — yes: one fixed strip, every card, every video, no per-video decisions); (3) **no-background + outline-only captions re-ratified** (his words: "não quero que tenham fundo, só sejam círculadas por outra cor") — the offending run had boxed captions from a stale pre-v1.3 plan; §4 (yellow `#FFD93D`, thick black stroke, no box) was and remains the law; (4) **mid-screen character re-ratified as broken** — the run left the character mid-screen with captions on his legs; §1/§2 (bottom-anchored, waist cut, head ≤ 55%) was and remains the law. No zone values changed — v1.4 adds the gate and makes the existing law louder.
 - **v1.3** — field-tested and closed by Luke (2026-10-30): (1) **captions are yellow and dry** — `#FFD93D`, thick black stroke, exactly 2 words per card, hard in/out, no bounce/fade (the old white style is dead); (2) **the character is bottom-anchored and cut at the waist by the bottom edge** — hoodie up top, a sliver of black jeans may show, never floating mid-screen; head never above 55% of frame height, position re-verified on every pose swap; (3) **the three zones are exclusive and locked** (photo 12–45% · caption ~50% · character 55–100%) with platform UI safe areas; (4) **output format locked** — 1080×1920 9:16, 30 fps, H.264 10–16 Mbps so nothing renders oversized for TikTok / YT Shorts.
 - **v1.2** — voice input flipped back: **Luke selects and sends the audio take himself** (default). The AI only cleans up (edge silence, assembly, enhance) and never cuts content. Raw unedited recordings are the exception and keep the v1.1 selection flow.
