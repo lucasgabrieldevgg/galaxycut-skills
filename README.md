@@ -6,21 +6,4 @@ AI skills for editing Luke's videos (GalaxyCut). **Feed these to any AI before i
 
 | Skill | What it defines | Raw URL (paste this into the AI chat) |
 |-------|-----------------|--------------------------------------|
-| **Dynamic Shorts Style** — v1.5 | The talking-character Short format: the LOCKED OPENING (0.50 s soft fade of background + character → red-outlined `#EF4444` ALL-CAPS Anton impact text typing over 0.80 s + impact image spinning in over 0.70 s), locked 3-zone frame layout (photo 12–45% · caption ~50% universal position · character bottom-anchored, waist cut at the bottom edge), character pose bank (9 files + 1 banned), **Anton captions: white `#FFFFFF` with thick black stroke, no background — the spoken word flashes yellow `#FFD93D` and returns to white (dry karaoke)**, **the approval gate** (complete transcription + numbered caption cards shown in the chat for Luke to edit and approve before anything is applied), hard-cut rules, 3-track audio mix, b-roll policy, locked output format (1080×1920 9:16, 30 fps, H.264), and the edit-map output table | `https://raw.githubusercontent.com/lucasgabrieldevgg/galaxycut-skills/main/dynamic-shorts-style.md` |
-
-## How to use
-
-1. Copy the raw URL of the skill you want.
-2. Paste it into any AI chat: *"Read this skill and follow it exactly: \<URL\>"*.
-3. Send your `[SCRIPT]` and the character pose bank folder.
-4. The AI answers with the edit map; if it is operating a real editor (e.g. GalaxyCut-AI in Bridge Mode), it applies the map to the timeline.
-
-## Conventions
-
-- One file per skill, self-contained, English, versioned in the file header.
-- Filenames of the character pose bank are the contract — the skill maps emotion → file.
-- The skill file is the **source of truth** for its format; app tool names may change, the spec does not.
-
-## Owner
-
-Luke — [lucasgabrieldevgg](https://github.com/lucasgabrieldevgg)
+| **Dynamic Shorts Style** — v1.6 | The talking-character Short format **measured from Luke's real reference video** (2026-11-02): the LOCKED OPENING (quick soft fade ~0.2-0.5 s of background + character → ALL-CAPS Anton impact text, WHITE with thick RED `#EF4444` outline, revealed WORD BY WORD as the voice speaks, with a blinking cursor + impact image in the photo zone), locked 3-zone frame layout (photo 5-35% · caption ~43% strip · character bottom-anchored, waist cut at the bottom edge), character pose bank (9 files + 1 banned), **lowercase Anton captions: white `#FFFFFF` with thick black stroke, no background, 1-2 words, word-synced, dry in/out — no highlight by default** (the yellow karaoke word `#FFD93D` is an on-request option), **LUKE'S OWN MUSIC FILE as the official background music** (60 s track, volume ~0.7 / -3 dB, **NO ducking**, starts with the video, dies in the hard cut), **the ENDING rule** (voice ends first → ~0.25 s music-only → EVERYTHING hard-cuts on the same frame — no fade-out, ever), the approval gate (complete transcription + numbered caption cards in the chat before anything is applied), hard-cut rules, 3-track audio mix (voice A1 / music A2 `music_*` / optional SFX), b-roll policy, locked output format (1080x1920 9:16, 30 fps, H.264, ~-10 LUFS), and the edit-map output table |
