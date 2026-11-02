@@ -232,7 +232,7 @@ Measured against Luke's real GTA 6 Short (2026-11-01, 20.54 s, full analysis in 
 
 ---
 
-*GalaxyCut · Dynamic Shorts Style v1.7 — this file is the source of truth for this format. Changes go through Luke.*
+*GalaxyCut · Dynamic Shorts Style v1.8 — this file is the source of truth for this format. Changes go through Luke.*
 
 ---
 
